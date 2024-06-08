@@ -29,9 +29,7 @@ app.use("/panel", express.static(path.join("adminpanel", "build")));
 configureRoutes(app);
 
 // Start server and listen for connections
-const server = app.listen(config.PORT, (resp, err) => {
-  console.log("resp", resp);
-  console.log("err", err);
+const server = app.listen(config.PORT, () => {
   console.log(
     `Server is running in ${config.NODE_ENV} mode and is listening on port ${config.PORT}...`
   );
@@ -46,7 +44,7 @@ io.on("connection", (socket) => gameSocket.init(socket, io));
 process.on("unhandledRejection", (err) => {
   db.disconnect();
 
-  console.error(`Error: ${err.message}`);
+  console.error(`Error::::::::::::: ${err.message}`);
   server.close(() => {
     process.exit(1);
   });
